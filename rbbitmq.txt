@@ -1,0 +1,325 @@
+Microsoft Windows [Version 10.0.10240]
+(c) 2015 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>docker-machine ls
+NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER      ERRORS
+docker-vm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v19.03.12
+docker-vm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v19.03.12
+
+C:\Windows\system32>d
+'d' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Windows\system32>
+C:\Windows\system32>
+C:\Windows\system32>
+C:\Windows\system32>
+C:\Windows\system32>docker-machine env docker-vm1
+SET DOCKER_TLS_VERIFY=1
+SET DOCKER_HOST=tcp://192.168.99.100:2376
+SET DOCKER_CERT_PATH=C:\Users\w2cluster431\.docker\machine\machines\docker-vm1
+SET DOCKER_MACHINE_NAME=docker-vm1
+SET COMPOSE_CONVERT_WINDOWS_PATHS=true
+REM Run this command to configure your shell:
+REM     @FOR /f "tokens=*" %i IN ('docker-machine env docker-vm1') DO @%i
+
+C:\Windows\system32>@FOR /f "tokens=*" %i IN ('docker-machine env docker-vm1') DO @%i
+
+C:\Windows\system32>docker-machine ls
+NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER      ERRORS
+docker-vm1   *        virtualbox   Running   tcp://192.168.99.100:2376           v19.03.12
+docker-vm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v19.03.12
+
+C:\Windows\system32>cd C:\MSProject
+
+C:\MSProject>cd mschasis
+
+C:\MSProject\mschasis>startchassis.bat -s rabbitmq
+'startchassis.bat' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\MSProject\mschasis>docker-machine ls
+NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER      ERRORS
+docker-vm1   *        virtualbox   Running   tcp://192.168.99.100:2376           v19.03.12
+docker-vm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v19.03.12
+
+C:\MSProject\mschasis>cd docker
+
+C:\MSProject\mschasis\docker>startchassis.bat -s rabbitmq
+"Starting docker network........."
+3e4ca5498055dda863a76b1232c1caea1e0f3eb49078ac622b15bb7fb3a57e33
+Installing rabbitmq .....
+Building rabbitmq-master
+Step 1/4 : FROM rabbitmq:3-management
+3-management: Pulling from library/rabbitmq
+7595c8c21622: Pull complete
+d13af8ca898f: Pull complete
+70799171ddba: Pull complete
+b6c12202c5ef: Pull complete
+7c7d7bd9523c: Pull complete
+30fd97770142: Pull complete
+2e22a196dea1: Pull complete
+e0010ee8d8de: Pull complete
+3d2d7e903ce4: Pull complete
+ac9f214f88d4: Pull complete
+21e583a187b0: Pull complete
+f9683ff7f4b2: Pull complete
+Digest: sha256:ca35b6cf96d9e43bc1f956a54a3d9b3e614be968a0a76be87afee0d674412ded
+Status: Downloaded newer image for rabbitmq:3-management
+ ---> d55229deb03e
+Step 2/4 : USER root
+ ---> Running in 2f44057e7300
+Removing intermediate container 2f44057e7300
+ ---> daa2d1fc6c33
+Step 3/4 : COPY ./config/definitions.json /etc/rabbitmq/definitions.json
+ ---> 48de7d71019d
+Step 4/4 : RUN chmod 777 /etc/rabbitmq/definitions.json
+ ---> Running in a9458eedad61
+Removing intermediate container a9458eedad61
+ ---> 340d226c5a6f
+Successfully built 340d226c5a6f
+Successfully tagged rabbitmq_rabbitmq-master:latest
+WARNING: Image for service rabbitmq-master was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
+Building rabbitmq-worker
+Step 1/4 : FROM rabbitmq:3-management
+ ---> d55229deb03e
+Step 2/4 : USER root
+ ---> Using cache
+ ---> daa2d1fc6c33
+Step 3/4 : COPY ./config/definitions.json /etc/rabbitmq/definitions.json
+ ---> Using cache
+ ---> 48de7d71019d
+Step 4/4 : RUN chmod 777 /etc/rabbitmq/definitions.json
+ ---> Using cache
+ ---> 340d226c5a6f
+Successfully built 340d226c5a6f
+Successfully tagged rabbitmq_rabbitmq-worker:latest
+WARNING: Image for service rabbitmq-worker was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
+Creating rabbitmq_rabbitmq-master_1 ... done
+Creating rabbitmq_rabbitmq-worker_1 ... done
+
+CONTAINERS
+---------------------------------------------------------------------------------
+CONTAINER ID        IMAGE                      COMMAND                  CREATED                  STATUS                  PORTS                                                                                                                                 NAMES
+73d9a60d5853        rabbitmq_rabbitmq-worker   "docker-entrypoint.s"   Less than a second ago   Up Less than a second   4369/tcp, 5671-5672/tcp, 15671-15672/tcp, 25672/tcp                                                                                   rabbitmq_rabbitmq-worker_1
+52c095745d99        rabbitmq_rabbitmq-master   "docker-entrypoint.s"   Less than a second ago   Up 1 second             0.0.0.0:4369->4369/tcp, 0.0.0.0:5671-5672->5671-5672/tcp, 0.0.0.0:15671-15672->15671-15672/tcp, 0.0.0.0:25671->25671/tcp, 25672/tcp   rabbitmq_rabbitmq-master_1
+
+*** END OF INSTALLATION ***
+C:\MSProject\mschasis\docker>docker-machine ls
+NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER      ERRORS
+docker-vm1   *        virtualbox   Running   tcp://192.168.99.100:2376           v19.03.12
+docker-vm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v19.03.12
+
+C:\MSProject\mschasis\docker>startchassis.bat -s zipkin
+"Starting docker network........."
+Error response from daemon: network with name ms-chassis-nw already exists
+Installing zipkin .....
+Pulling zipkin (openzipkin/zipkin:latest)...
+latest: Pulling from openzipkin/zipkin
+24f0c933cbef: Pull complete
+69e2f037cdb3: Pull complete
+d18ce7e3cfbf: Pull complete
+3e010093287c: Pull complete
+ff8d695c8034: Pull complete
+bafcf7f5bf7c: Pull complete
+9ce515a792e2: Pull complete
+87921e7f982d: Pull complete
+4e50910e45ce: Pull complete
+af82f3a7be38: Pull complete
+e2f6f9ca92b9: Pull complete
+4ce8db03b7f3: Pull complete
+Digest: sha256:096200b68b0c56ab3446622a94c8d1a64c849b36d068c3bcf0799c73435d2e48
+Status: Downloaded newer image for openzipkin/zipkin:latest
+Creating zipkin_zipkin_1 ... done
+
+CONTAINERS
+---------------------------------------------------------------------------------
+CONTAINER ID        IMAGE                      COMMAND                  CREATED                  STATUS                  PORTS                                                                                                                                 NAMES
+e78bf5f29ad5        openzipkin/zipkin          "/busybox/sh run.sh"     Less than a second ago   Up Less than a second   9410/tcp, 0.0.0.0:9411->9411/tcp                                                                                                      zipkin_zipkin_1
+73d9a60d5853        rabbitmq_rabbitmq-worker   "docker-entrypoint.s"   16 hours ago             Up 16 hours             4369/tcp, 5671-5672/tcp, 15671-15672/tcp, 25672/tcp                                                                                   rabbitmq_rabbitmq-worker_1
+52c095745d99        rabbitmq_rabbitmq-master   "docker-entrypoint.s"   16 hours ago             Up 16 hours             0.0.0.0:4369->4369/tcp, 0.0.0.0:5671-5672->5671-5672/tcp, 0.0.0.0:15671-15672->15671-15672/tcp, 0.0.0.0:25671->25671/tcp, 25672/tcp   rabbitmq_rabbitmq-master_1
+
+*** END OF INSTALLATION ***
+C:\MSProject\mschasis\docker>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
